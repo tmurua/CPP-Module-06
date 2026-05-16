@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 08:05:15 by tmurua            #+#    #+#             */
-/*   Updated: 2026/05/16 10:33:32 by tmurua           ###   ########.fr       */
+/*   Updated: 2026/05/16 16:18:50 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 #include <string>
 
 class ScalarConverter{
-private:
+private: //canonical form is private for non instatiable class
 	ScalarConverter();
 	ScalarConverter(const ScalarConverter &other);
 	ScalarConverter	&operator=(const ScalarConverter &other);
 	~ScalarConverter();
 
 public:
-	static void convert(std::string value);
+	static void convert(const std::string &value);
 };
 
 #endif
