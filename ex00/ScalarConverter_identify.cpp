@@ -12,6 +12,7 @@
 
 #include "ScalarConverter.hpp"
 
+#include <cctype>	// std::isprint std::isdigit
 #include <cstdlib>	// std::strtol std::strtod
 #include <cerrno>	// errno, ERANGE
 #include <climits>	// INT_MIN, INT_MAX
@@ -24,15 +25,19 @@ bool	ScalarConverter::isPseudo(const std::string &strValue){
 	return (false);
 }
 
-// 2. char, like 'a' - it has 3 characteres: index 0 = '; 1 = char itself; 2 = '
-bool ScalarConverter::isChar(const std::string &strValue){
-	if (strValue.length() != 3)
-		return (false);
-	if (strValue[0] != '\'')
-		return (false);
-	if (strValue[2] != '\'')
-		return (false);
-	return (true);
+// 2. char, like 'a', a, or "a", shell converts everything to just a
+bool ScalarConverter::isChar(const std::string &strValue)
+{
+	// argv[1] needs to be exacly one character long to be a char
+	if (strValue.length() != 1)
+		return false;
+	// reject non-printable characters.
+	if (!std::isprint(strValue[0]))
+		return false;
+	// Reject digits, "1" should be handled as int, not char
+	if (std::isdigit(strValue[0]))
+		return false;
+	return true;
 }
 
 // 3. int, like 42

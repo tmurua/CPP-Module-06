@@ -38,8 +38,8 @@ void	ScalarConverter::convert(const std::string &strValue)
 	}
 	// 2. char; like 'a'
 	else if (isChar(strValue)){
-		// real char is the middle char, it already is a numeric value of type char
-		char charValue = strValue[1];
+		// first and only char of the string, a numeric value of type char
+		char charValue = strValue[0];
 
 		// static_cast converts num type (char) into num type (double), then print
 		printAllConversions(static_cast<double>(charValue));

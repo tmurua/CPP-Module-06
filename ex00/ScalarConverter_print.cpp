@@ -97,7 +97,7 @@ void ScalarConverter::printInt(double numValue)
 		return;
 	}
 
-	// convert double -> int using static_char
+	// convert double -> int using static_cast
 	std::cout << "int: " << static_cast<int>(numValue) << std::endl;
 }
 
