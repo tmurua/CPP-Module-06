@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.class.hpp"
+#include "ScalarConverter.hpp"
 
 #include <iostream>
 
