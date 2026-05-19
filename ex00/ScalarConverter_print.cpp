@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/16 15:57:12 by tmurua            #+#    #+#             */
+/*   Created: 2026/05/15 15:57:12 by tmurua            #+#    #+#             */
 /*   Updated: 2026/05/16 16:51:05 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -89,8 +89,7 @@ void ScalarConverter::printChar(double numValue){
 }
 
 // 3. int
-void ScalarConverter::printInt(double numValue)
-{
+void ScalarConverter::printInt(double numValue){
 	// outside int range -> impossible
 	if (numValue < INT_MIN || numValue > INT_MAX){
 		std::cout << "int: impossible" << std::endl;
@@ -102,8 +101,7 @@ void ScalarConverter::printInt(double numValue)
 }
 
 // 4. double
-void ScalarConverter::printDouble(double numValue)
-{
+void ScalarConverter::printDouble(double numValue){
 	double integerPart;
 	double fractionalPart;
 
@@ -132,8 +130,7 @@ void ScalarConverter::printDouble(double numValue)
 }
 
 // 5. float
-void ScalarConverter::printFloat(double numValue)
-{
+void ScalarConverter::printFloat(double numValue){
 	float floatValue;
 	double integerPart;
 	double fractionalPart;
