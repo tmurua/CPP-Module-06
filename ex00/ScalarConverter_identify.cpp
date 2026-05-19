@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
-
+#include <string>
 #include <cctype>	// std::isprint std::isdigit
 #include <cstddef>	// std::size_t
 #include <cstdlib>	// std::strtol std::strtod
@@ -20,7 +19,7 @@
 #include <cfloat>	// FLT_MIN, FLT_MAX
 
 // 1. pseudo; special values from the subject
-bool	ScalarConverter::isPseudo(const std::string &strValue){
+bool	isPseudo(const std::string &strValue){
 	if (strValue == "nan" || strValue == "+inf" || strValue == "-inf"
 		|| strValue == "nanf" || strValue == "+inff" || strValue == "-inff")
 		return (true);
@@ -28,7 +27,7 @@ bool	ScalarConverter::isPseudo(const std::string &strValue){
 }
 
 // 2. char, like 'a', a, or "a", shell converts everything to just a
-bool ScalarConverter::isChar(const std::string &strValue){
+bool	isChar(const std::string &strValue){
 	// argv[1] needs to be exacly one character long to be a char
 	if (strValue.length() != 1)
 		return false;
@@ -44,7 +43,7 @@ bool ScalarConverter::isChar(const std::string &strValue){
 // 3. int, like 42
 // long std::strtol(const char* str, char **endptr, int base);
 // converts a c-string into a long, stores where parsing stopped at endptr
-bool ScalarConverter::isInt(const std::string &strValue){
+bool	isInt(const std::string &strValue){
 	char *parseEnd;
 	long numValue;
 
@@ -72,7 +71,7 @@ bool ScalarConverter::isInt(const std::string &strValue){
 // 4. double, like 4.2
 // double std::strtod(const char* str, char **endptr);
 // converts a c-string into a double, stores where parsing stopped at endptr
-bool ScalarConverter::isDouble(const std::string &strValue){
+bool	isDouble(const std::string &strValue){
 	char		*parseEnd;
 	std::size_t	dotPos = strValue.find('.');
 
@@ -105,7 +104,7 @@ bool ScalarConverter::isDouble(const std::string &strValue){
 }
 
 // 5. float, like 4.2f
-bool ScalarConverter::isFloat(const std::string &strValue){
+bool	isFloat(const std::string &strValue){
 	std::string strValueWithoutF;
 	double		numValue;
 	

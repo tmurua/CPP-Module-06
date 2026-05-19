@@ -22,21 +22,6 @@ private: //canonical form is private for non instatiable class
 	ScalarConverter	&operator=(const ScalarConverter &other);
 	~ScalarConverter();
 
-	// helpers to identify which type is the std::string strValue
-	static bool	isPseudo(const std::string &strValue);
-	static bool	isChar(const std::string &strValue);
-	static bool	isInt(const std::string &strValue);
-	static bool	isFloat(const std::string &strValue);
-	static bool	isDouble(const std::string &strValue);
-
-	// after finding strValue, convert and print each type
-	static void	printPseudo(const std::string &strValue);
-	static void	printAllConversions(double numValue);
-	static void	printChar(double numValue);
-	static void	printInt(double numValue);
-	static void	printFloat(double numValue);
-	static void	printDouble(double numValue);
-
 public:
 	static void	convert(const std::string &strValue);
 };

@@ -15,6 +15,22 @@
 #include <iostream>
 #include <cstdlib>	// std::strtol std::strtod
 
+// helpers to identify which type is the std::string strValue
+bool	isPseudo(const std::string &strValue);
+bool	isChar(const std::string &strValue);
+bool	isInt(const std::string &strValue);
+bool	isFloat(const std::string &strValue);
+bool	isDouble(const std::string &strValue);
+
+// after finding strValue, convert and print each type
+void	printPseudo(const std::string &strValue);
+void	printAllConversions(double numValue);
+void	printChar(double numValue);
+void	printInt(double numValue);
+void	printFloat(double numValue);
+void	printDouble(double numValue);
+
+
 ScalarConverter::ScalarConverter(){}
 
 ScalarConverter::ScalarConverter(const ScalarConverter &other){

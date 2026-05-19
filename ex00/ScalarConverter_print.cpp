@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
 
+#include <string>
 #include <iostream>
 #include <limits>	// std::numeric_limits<char>::min/max
 #include <cctype>	// std::isprint
@@ -20,8 +20,13 @@
 #include <cmath>	// std::modf
 #include <cfloat>	// FLT_MIN, FLT_MAX
 
+void	printChar(double numValue);
+void	printInt(double numValue);
+void	printFloat(double numValue);
+void	printDouble(double numValue);
+
 // after converting strValue into numValue in convert(), print all outputs
-void ScalarConverter::printAllConversions(double numValue){
+void printAllConversions(double numValue){
 	printChar(numValue);
 	printInt(numValue);
 	printFloat(numValue);
@@ -30,7 +35,7 @@ void ScalarConverter::printAllConversions(double numValue){
 
 // 1. pseudo
 // print the 4 output lines for pseudo types, just hardcode 6 possibilities
-void ScalarConverter::printPseudo(const std::string &strValue){
+void printPseudo(const std::string &strValue){
 	std::cout << "char: impossible" << std::endl;
 	std::cout << "int: impossible" << std::endl;
 
@@ -67,70 +72,64 @@ void ScalarConverter::printPseudo(const std::string &strValue){
 }
 
 // 2. char
-void ScalarConverter::printChar(double numValue){
+void printChar(double numValue){
 	// outside char range -> impossible
 	if (numValue < std::numeric_limits<char>::min() ||
 		numValue > std::numeric_limits<char>::max()){
 		std::cout << "char: impossible" << std::endl;
 		return;
 	}
-
 	// convert double -> char using static_cast
 	char charValue = static_cast<char>(numValue);
-
 	// if char exists but is not printable
 	if (!std::isprint(static_cast<unsigned char>(charValue))){
 		std::cout << "char: Non displayable" << std::endl;
 		return;
 	}
-
 	// otherwise print it between quotes
 	std::cout << "char: '" << charValue << "'" << std::endl;
 }
 
 // 3. int
-void ScalarConverter::printInt(double numValue){
+void printInt(double numValue){
 	// outside int range -> impossible
 	if (numValue < INT_MIN || numValue > INT_MAX){
 		std::cout << "int: impossible" << std::endl;
 		return;
 	}
-
-	// convert double -> int using static_cast
+	// convert double -> int using static_cast and print
 	std::cout << "int: " << static_cast<int>(numValue) << std::endl;
 }
 
 // 4. double
-void ScalarConverter::printDouble(double numValue){
+void printDouble(double numValue){
 	double integerPart;
 	double fractionalPart;
 
-	// std::modf splits "numValue" into 2 parts, like:
+	// std::modf splits "numValue" into 2 parts, ex.:
 	// 42.0  -> integerPart = 42.0, fractionalPart = 0.0
 	// 42.5  -> integerPart = 42.0, fractionalPart = 0.5
 	// -3.25 -> integerPart = -3.0, fractionalPart = -0.25
 	fractionalPart = std::modf(numValue, &integerPart);
 
 	// if fractionalPart is 0.0, print decimal digit (42.0, not 42)
-	// fixed (so cout don't print a big numValue with scientific notation)
-	// setprecision to only 1 decimal
+	// fixed() makes setprecision(1) mean one digit after decimal point
 	if (fractionalPart == 0.0){
 		std::cout << "double: " << std::fixed << std::setprecision(1)
 			<< numValue << std::endl;
 	}
 	else
-		// if there is a decimal part, print the numValue normally
-		// 42.5 -> "42.5"
+		// if there's a decimal part, print numValue normally: 42.5 -> "42.5"
 		std::cout << "double: " << numValue << std::endl;
 
-	// fixed and setprecision change the formatting state of std::cout
-	// this formatting would affect later prints, so reset it
+	// fixed() and setprecision() change the formatting state of std::cout()
+	// this formatting  affects std::cout behavior for everything, so reset it
 	std::cout.unsetf(std::ios::floatfield);
 	std::cout << std::setprecision(6);
 }
 
 // 5. float
-void ScalarConverter::printFloat(double numValue){
+void printFloat(double numValue){
 	float floatValue;
 	double integerPart;
 	double fractionalPart;
@@ -140,10 +139,8 @@ void ScalarConverter::printFloat(double numValue){
 		std::cout << "float: impossible" << std::endl;
 		return;
 	}
-
-	// normal explicit conversion from double to float
+	// convert double -> float with static_cast
 	floatValue = static_cast<float>(numValue);
-
 	// from here it works the same as printDouble()
 	fractionalPart = std::modf(numValue, &integerPart);
 	if (fractionalPart == 0.0)
