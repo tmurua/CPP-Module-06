@@ -18,6 +18,7 @@
 
 struct Data{
 	std::string name;
+	int			value;
 };
 
 class Serializer{
@@ -28,7 +29,10 @@ private:
 	~Serializer();
 
 public:
-	static uintptr_t serialize(Data* ptr);
+	// convert Data* into an integer type that can hold a pointer
+	static uintptr_t	serialize(Data *ptr);
+	// convert the integer back into the original pointer type
+	static Data			*deserialize(uintptr_t raw);
 
 };
 

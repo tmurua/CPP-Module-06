@@ -6,7 +6,7 @@
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 18:05:25 by tmurua            #+#    #+#             */
-/*   Updated: 2026/05/19 18:14:18 by tmurua           ###   ########.fr       */
+/*   Updated: 2026/05/19 21:03:32 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,3 +24,16 @@ Serializer	&Serializer::operator=(const Serializer &other){
 }
 
 Serializer::~Serializer(){}
+
+// reinterpret_cast 
+// values are not being converted, just a pointer is reinterpreted as an int
+uintptr_t	Serializer::serialize(Data *ptr){
+	return (reinterpret_cast<uintptr_t>(ptr));
+}
+
+// same idea in reverse; reinterpret the integer back into a pointer to Data 
+Data	*Serializer::deserialize(uintptr_t raw){
+	return (reinterpret_cast<Data *>(raw));
+}
+
+
