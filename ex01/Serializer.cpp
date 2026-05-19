@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serializer.hpp                                     :+:      :+:    :+:   */
+/*   Serializer.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmurua <tmurua@student.42berlin.de>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/19 16:02:17 by tmurua            #+#    #+#             */
-/*   Updated: 2026/05/19 18:08:46 by tmurua           ###   ########.fr       */
+/*   Created: 2026/05/19 18:05:25 by tmurua            #+#    #+#             */
+/*   Updated: 2026/05/19 18:14:18 by tmurua           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERIALIZER_HPP
-#define SERIALIZER_HPP
+#include "Serializer.hpp"
 
-#include <string>
-#include <stdint.h>	// uintptr_t
+Serializer::Serializer(){}
 
-struct Data{
-	std::string name;
-};
+Serializer::Serializer(const Serializer &other){
+	(void)other;
+}
 
-class Serializer{
-private:
-	Serializer();
-	Serializer(const Serializer &other);
-	Serializer	&operator=(const Serializer &other);
-	~Serializer();
+Serializer	&Serializer::operator=(const Serializer &other){
+	(void)other;
+	return (*this);
+}
 
-public:
-	static uintptr_t serialize(Data* ptr);
-
-};
-
-#endif
+Serializer::~Serializer(){}
