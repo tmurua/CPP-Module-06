@@ -27,36 +27,30 @@ Base* generate(void){
 }
 
 void identify(Base* p){
-	// with pointers dynamic_cast returns 0 if it fails
-	// so store each result and check which one is not 0
-	A* aPointer = dynamic_cast<A*>(p);
-	B* bPointer = dynamic_cast<B*>(p);
-	C* cPointer = dynamic_cast<C*>(p);
-
-	if (aPointer != 0){
+	// dynamic_cast checks the real object type created behind the Base pointer
+	if (dynamic_cast<A*>(p)){
 		std::cout << "A" << std::endl;
 		return;
 	}
-	if (bPointer != 0){
+	if (dynamic_cast<B*>(p)){
 		std::cout << "B" << std::endl;
 		return;
 	}
-	if (cPointer != 0){
+	if (dynamic_cast<C*>(p)){
 		std::cout << "C" << std::endl;
 		return;
 	}
 }
 
 void identify(Base& p){
-	// with references dynamic_cast does not return 0 on failure
-	// it throws an exception instead
+	// with references, throw an exception if it fails
 	try{
 		A& aReference = dynamic_cast<A&>(p);
 		(void)aReference;
 		std::cout << "A" << std::endl;
 		return;
 	}
-	catch (...){}
+	catch (const std::exception&){}
 
 	try{
 		B& bReference = dynamic_cast<B&>(p);
@@ -64,8 +58,7 @@ void identify(Base& p){
 		std::cout << "B" << std::endl;
 		return;
 	}
-	catch (...){
-	}
+	catch (const std::exception&){}
 
 	try{
 		C& cReference = dynamic_cast<C&>(p);
@@ -73,5 +66,5 @@ void identify(Base& p){
 		std::cout << "C" << std::endl;
 		return;
 	}
-	catch (...){}
+	catch (const std::exception&){}
 }

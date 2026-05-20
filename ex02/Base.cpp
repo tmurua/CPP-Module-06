@@ -12,5 +12,4 @@
 
 #include "Base.hpp"
 
-// virtual destructor makes Base polymorphic, required for dynamic_cast
 Base::~Base(){}

@@ -11,28 +11,20 @@
 /* ************************************************************************** */
 
 #include "Base.hpp"
-
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
+#include <cstdlib>	// std::srand()
+#include <ctime>	// std::time()
 
 int main(void)
 {
-	// seed random once
-	std::srand(std::time(0));
+	std::srand(std::time(0));	// start random num generator at current time 
 
-	for (int i = 0; i < 10; i++)
-	{
-		Base* object = generate();
+	Base* object = generate();
 
-		std::cout << "pointer:   ";
-		identify(object);
+	std::cout << "pointer:   ";
+	identify(object);
+	std::cout <<  "reference: ";
+	identify(*object);
 
-		std::cout << "reference: ";
-		identify(*object);
-
-		delete object;
-	}
-
-	return (0);
+	delete object;
 }
